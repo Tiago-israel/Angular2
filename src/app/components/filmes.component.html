@@ -1,0 +1,13 @@
+<div class="container-fluid">
+    <div class="row">
+        <div *ngFor="let filme of filmes" class="col-md-2">
+            <div class="panel  custom-panel">
+                <div class="panel-body custom-body">
+                    <img [src]="'https://image.tmdb.org/t/p/w500'+filme.poster_path" class="custom-img img-responsive" />
+                    <b>Data de lançamento:</b> {{filme.release_date | date:"MM/dd/yy"}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="150" (scrolled)="onScroll()"></div>
+</div>

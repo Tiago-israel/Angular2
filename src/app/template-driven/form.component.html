@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-xs-offset-3">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Cadastro</h2>
+                </div>
+                <div class="panel-body">
+                    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                        <div class="form-group" [class.has-error]="validarForm(nome)">
+                            <label>Nome:</label>
+                            <input type="text" #nome="ngModel" [(ngModel)]="pessoa.nome" required minlength="5" maxlength="255" name="nome" class="form-control"
+                            />
+                            <span class="error" *ngIf="validarForm(nome)">{{mensagens[nome.name]}}</span>
+                        </div>
+                        <div class="form-group" [class.has-error]="validarForm(data)">
+                            <label>Data de nascimento:</label>
+                            <input type="date" #data="ngModel" [(ngModel)]="pessoa.dataNascimento" required name="data" class="form-control" />
+                            <span class="error" *ngIf="validarForm(data)">{{mensagens[data.name]}}</span>
+                        </div>
+                        <div class="form-group" [class.has-error]="validarForm(quantidade)">
+                            <label>Quantidade:</label>
+                            <input type="number" #quantidade="ngModel" [(ngModel)]="pessoa.quantidade" min="1" max="200" required name="quantidade" class="form-control"
+                            />
+                            <span class="error" *ngIf="validarForm(quantidade)">{{mensagens[quantidade.name]}}</span>
+                        </div>
+                        <div class="form-group" [class.has-error]="validarForm(email)">
+                            <label>Email:</label>
+                            <input type="text" #email="ngModel" [(ngModel)]="pessoa.email" required email name="email" class="form-control" />
+                            <span class="error" *ngIf="validarForm(email)">{{mensagens[email.name]}}</span>
+                        </div>
+                        <div class="form-group" [class.has-error]="validarSelects(estado)">
+                            <label>Estado:</label>
+                            <select class="form-control" #estado="ngModel" [(ngModel)]="pessoa.estadoId" required name="estado">
+                                <option [value]="-1">Selecione</option>
+                                <option value="1">MG</option>
+                                <option value="2">RJ</option>
+                                <option value="3">SP</option>
+                            </select>
+                            <span class="error" *ngIf="validarSelects(estado)">{{mensagens[estado.name]}}</span>
+                        </div>
+                        <div class="form-group" [class.has-error]="validarSelects(emprego)">
+                            <label>Emprego:</label>
+                            <select class="form-control" #emprego="ngModel" [(ngModel)]="pessoa.empregoId" [required]="pessoa.empregoId == -1" name="emprego">
+                                <option [value]="-1">Selecione</option>
+                                <option value="1">Jornalista</option>
+                                <option value="2">Programador</option>
+                                <option value="3">Motorista</option>
+                            </select>
+                            <span class="error" *ngIf="validarSelects(emprego)">{{mensagens[emprego.name]}}</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Aceitar termos de serviço</label>
+                            <input type="checkbox" #termo="ngModel" [(ngModel)]="pessoa.termo" required name="termo" />
+                            <span class="error" *ngIf="validarForm(termo)">{{mensagens[termo.name]}}</span>
+                        </div>
+                        <div>
+                            <input  [disabled]="form.invalid" type="submit" value="Salvar" class="btn btn-success" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
